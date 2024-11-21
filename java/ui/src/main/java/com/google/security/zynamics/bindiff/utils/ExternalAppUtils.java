@@ -58,15 +58,6 @@ public class ExternalAppUtils {
   public static File getIdaExe(final File inFile) {
     final String extension = FileUtils.getFileExtension(inFile);
     final IdaProOptions ida = Config.getInstance().getIda();
-
-    String idaExe;
-    if (Ascii.equalsIgnoreCase(extension, Constants.IDB64_EXTENSION)) {
-      idaExe = IdaHelpers.IDA64_EXECUTABLE;
-    } else if (Ascii.equalsIgnoreCase(extension, Constants.IDB32_EXTENSION)) {
-      idaExe = IdaHelpers.IDA32_EXECUTABLE;
-    } else {
-      return null;
-    }
-    return Paths.get(ida.getDirectory(), idaExe).toFile();
+    return Paths.get(ida.getDirectory(), IdaHelpers.IDA_EXECUTABLE).toFile();
   }
 }
