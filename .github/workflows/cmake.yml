@@ -22,7 +22,7 @@ jobs:
         path: bindiff
     - uses: actions/checkout@v4
       with:
-        repository: google/binexport
+        repository: cs2-analysis/binexport
         path: binexport
 
     - name: Install ninja-build tool
@@ -39,12 +39,14 @@ jobs:
         mv binexport/ida/idasdk/idasdk*.gpg \
            ida/idasdk/
         binexport/.github/scripts/decrypt_secret.sh
-        unzip -q "${{ runner.workspace }}/build/idasdk_teams82.zip" \
+        unzip -q "${{ runner.workspace }}/build/idasdk90.zip" \
               -d "${{ runner.workspace }}/build/"
 
     - name: Enable Developer Command Prompt (Windows)
       if: matrix.os == 'windows-2022'
       uses: ilammy/msvc-dev-cmd@v1.12.1
+      with:
+        sdk: '10.0.22621.0'
 
     - name: Enable mold linker (Linux)
       if: matrix.os == 'ubuntu-22.04'
@@ -56,7 +58,7 @@ jobs:
       run: |
         cmake "${{ github.workspace }}/bindiff" -G Ninja \
           "-DCMAKE_BUILD_TYPE=${BUILD_TYPE}" \
-          "-DIdaSdk_ROOT_DIR=${{ runner.workspace }}/build/idasdk_teams82"
+          "-DIdaSdk_ROOT_DIR=${{ runner.workspace }}/build/idasdk90"
 
     - name: Build
       working-directory: ${{ runner.workspace }}/build
