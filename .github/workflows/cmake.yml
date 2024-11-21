@@ -74,7 +74,9 @@ jobs:
       uses: actions/upload-artifact@v3.1.2
       with:
         name: BinDiff-${{ runner.os }}
+        if-no-files-found: ignore
         path: |
           ${{ runner.workspace }}/build/bindiff
+          ${{ runner.workspace }}/build/bindiff.exe
           ${{ runner.workspace }}/build/ida/bindiff*
           ${{ runner.workspace }}/build/tools/bindiff*
