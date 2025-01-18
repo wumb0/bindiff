@@ -22,7 +22,7 @@ jobs:
         path: bindiff
     - uses: actions/checkout@v4
       with:
-        repository: cs2-analysis/binexport
+        repository: ${{ github.actor }}/binexport
         path: binexport
 
     - name: Install ninja-build tool
